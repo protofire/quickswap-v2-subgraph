@@ -1,0 +1,26 @@
+specVersion: 1.3.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: UniswapV2Factory
+    network: base-sepolia
+    source:
+      address: "0xfc8EEB5070cE92910b684ad5dA3f147e8F436B3f"
+      abi: UniswapV2Factory
+      startBlock: 26937603
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - PairCreated
+      abis:
+        - name: UniswapV2Factory
+          file: ./abis/UniswapV2Factory.json
+      eventHandlers:
+        - event: PairCreated(indexed address,indexed address,address,uint256)
+          handler: handlePairCreated
+      file: ./src/uniswap-v-2-factory.ts
