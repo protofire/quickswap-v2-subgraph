@@ -1,13 +1,10 @@
 {
-  "name": "quickswap-v2-base-sepolia",
+  "name": "quickswap-v2",
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ quickswap-v2-base-sepolia",
-    "create-local": "graph create --node http://localhost:8020/ quickswap-v2-base-sepolia",
-    "remove-local": "graph remove --node http://localhost:8020/ quickswap-v2-base-sepolia",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 quickswap-v2-base-sepolia",
+    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ quickswap-v-2-base-sepolia",
     "test": "graph test"
   },
   "dependencies": {

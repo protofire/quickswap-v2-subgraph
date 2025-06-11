@@ -1,26 +1,63 @@
-specVersion: 1.3.0
-indexerHints:
-  prune: auto
+specVersion: 0.0.4
+description: Quickswap is a decentralized protocol for automated token exchange on Matic.
+repository: https://github.com/QuickSwap/QuickSwap-subgraph.git
 schema:
   file: ./schema.graphql
 dataSources:
-  - kind: ethereum
-    name: UniswapV2Factory
+  - kind: ethereum/contract
+    name: Factory
     network: base-sepolia
     source:
-      address: "0xfc8EEB5070cE92910b684ad5dA3f147e8F436B3f"
-      abi: UniswapV2Factory
+      address: '0xfc8EEB5070cE92910b684ad5dA3f147e8F436B3f'
+      abi: Factory
       startBlock: 26937603
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.9
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
+      file: ./src/mappings/factory.ts
       entities:
-        - PairCreated
+        - Pair
+        - Token
       abis:
-        - name: UniswapV2Factory
-          file: ./abis/UniswapV2Factory.json
+        - name: Factory
+          file: ./abis/factory.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20SymbolBytes
+          file: ./abis/ERC20SymbolBytes.json
+        - name: ERC20NameBytes
+          file: ./abis/ERC20NameBytes.json
       eventHandlers:
         - event: PairCreated(indexed address,indexed address,address,uint256)
-          handler: handlePairCreated
-      file: ./src/uniswap-v-2-factory.ts
+          handler: handleNewPair
+templates:
+  - kind: ethereum/contract
+    name: Pair
+    network: base-sepolia
+    source:
+      abi: Pair
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: ./src/mappings/core.ts
+      entities:
+        - Pair
+        - Token
+      abis:
+        - name: Pair
+          file: ./abis/pair.json
+        - name: Factory
+          file: ./abis/factory.json
+      eventHandlers:
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Burn(indexed address,uint256,uint256,indexed address)
+          handler: handleBurn
+        - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
+          handler: handleSwap
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: Sync(uint112,uint112)
+          handler: handleSync
