@@ -1,8 +1,16 @@
 {
   "base-sepolia": {
-    "UniswapV2Factory": {
+    "Factory": {
       "address": "0xfc8EEB5070cE92910b684ad5dA3f147e8F436B3f",
-      "startBlock": 26937603
+      "startBlock": 26937603,
+      "abi": "Factory"
+    }
+  },
+  "base": {
+    "Factory": {
+      "address": "0xEC6540261aaaE13F236A032d454dc9287E52e56A",
+      "startBlock": 31518394,
+      "abi": "Factory"
     }
   }
 }

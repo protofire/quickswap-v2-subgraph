@@ -4,6 +4,12 @@ This is a subgraph that tracks the Uniswap V2 protocol, indexing and exposing on
 
 ### Setup
 
+Copy template to subgraph.yaml
+```
+cp subgraph.template.yaml subgraph.yaml
+```
+
+Install deps and generate code
 ```
 yarn
 yarn codegen
@@ -18,5 +24,5 @@ yarn test
 ### Deploy
 
 ```
-yarn deploy
+yarn deploy:base
 ```

@@ -3,8 +3,10 @@
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",
-    "build": "graph build",
-    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ quickswap-v-2-base-sepolia",
+    "build:base-sepolia": "graph build --network base-sepolia",
+    "build:base": "graph build --network base",
+    "deploy:base-sepolia": "graph deploy --network base-sepolia --node https://api.studio.thegraph.com/deploy/ quickswap-v-2-base-sepolia",
+    "deploy:base": "graph deploy --network base --node https://api.studio.thegraph.com/deploy/ quickswap-v-2-base",
     "test": "graph test"
   },
   "dependencies": {
