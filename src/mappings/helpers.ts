@@ -6,7 +6,7 @@ import { User, Bundle, Token, LiquidityPosition, LiquidityPositionSnapshot, Pair
 import { Factory as FactoryContract } from '../../generated/templates/Pair/Factory'
 
 export const ADDRESS_ZERO = '0x0000000000000000000000000000000000000000'
-export const FACTORY_ADDRESS = '0xfc8EEB5070cE92910b684ad5dA3f147e8F436B3f'
+export const FACTORY_ADDRESS = '0xEC6540261aaaE13F236A032d454dc9287E52e56A'
 
 export let ZERO_BI = BigInt.fromI32(0)
 export let ONE_BI = BigInt.fromI32(1)

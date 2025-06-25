@@ -3,8 +3,8 @@ import { Pair, Token, Bundle } from '../../generated/schema'
 import { BigDecimal } from '@graphprotocol/graph-ts/index'
 import { ZERO_BD, ONE_BD } from './helpers'
 
-const WETH_ADDRESS = '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619'
-const USDC_WETH_PAIR = '0x853ee4b2a13f8a742d64c8f088be7ba2131f670d' // created 10008355
+const WETH_ADDRESS = '0x4200000000000000000000000000000000000006'
+const USDC_WETH_PAIR = '0x3099a7c284610897baaa43cbdc06469e44a06ce1' // created 10008355
 const DAI_WETH_PAIR = '0x4a35582a710e1f4b2030a3f826da20bfb6703c09' // created block 10042267
 const USDT_WETH_PAIR = '0xf6422b997c7f54d1c6a6e103bcb1499eea0a7046' // created block 10093341
 
@@ -12,7 +12,7 @@ export function getEthPriceInUSD(): BigDecimal {
   //For now we will only use USDC_WETH pair for ETH prices
   let usdcPair = Pair.load(USDC_WETH_PAIR)
   if (usdcPair !== null) {
-    return usdcPair.token0Price
+    return usdcPair.token1Price
   } else {
     return ZERO_BD
   }
@@ -46,19 +46,10 @@ export function getEthPriceInUSD(): BigDecimal {
 
 // token where amounts should contribute to tracked volume and liquidity
 let WHITELIST: string[] = [
-  '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619', // WETH
-  '0x2791bca1f2de4661ed88a30c99a7a9449aa84174', // USDC
-  '0x831753dd7087cac61ab5644b308642cc1c33dc13', //QUICK
-  '0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270', //WMATIC
-  '0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6', //WBTC
-  '0x8f3cf7ad23cd3cadbd9735aff958023239c6a063', // DAI
-  '0xc2132d05d31c914a87c6611c10748aeb04b58e8f', // USDT
-  '0x9719d867a500ef117cc201206b8ab51e794d3f82', //MAUSDC
-  '0x104592a158490a9228070e0a8e5343b499e125d0', //FRAX
-  '0x033d942a6b495c4071083f4cde1f17e986fe856c', //AGA
-  '0xd6df932a45c0f255f85145f286ea0b292b21c90b', //AAVE
-  '0xa7051c5a22d963b81d71c2ba64d46a877fbc1821', //EROWAN
-  '0x8497842420cfdbc97896c2353d75d89fc8d5be5d' //VERSA
+  WETH_ADDRESS, // WETH
+  '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913', // USDC
+  '0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf', // cbBTC
+  '0x9BbA915F036158582C20B51113B925f243A1A1A1', // IMGN
 ]
 
 let BLACKLIST: string[] = ['0x5d76fa95c308fce88d347556785dd1dd44416272']
@@ -81,7 +72,7 @@ export function addToBlackList(token: string): void {
   BLACKLIST.push(token)
 }
 // minimum liquidity for price to get tracked
-let MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('1')
+let MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('0.01')
 
 /**
  * Search through graph to find derived Eth per token.
